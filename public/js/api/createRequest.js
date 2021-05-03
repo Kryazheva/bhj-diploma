@@ -22,7 +22,7 @@ const createRequest = (options = {}) => {
     };
     xhr.onload = () => {
         if (xhr.status != 200) {
-            options.callback = (err, response) => {return err};
+            options.callback(err, response);
         } else {
             options.callback(null, response);
         } 
