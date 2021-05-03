@@ -25,9 +25,14 @@ const createRequest = (options = {}) => {
             options.callback = (err, response) => {return err};
         } else {
             options.callback(null, response);
-        }
+        } 
+        // или мы можем так сделать?     
+        // xhr.onload = () => {
+        // if (xhr.status === 200) {
+        //     options.callback(null, response);
+        // } 
     };
     xhr.onerror = () => { 
-        console.error('Запрос не удался') 
+        console.error('Запрос не удался') // а в случае неудачи так понимаю нам придет ответ от сервера по собитыю onerror ? 
     };
 };
