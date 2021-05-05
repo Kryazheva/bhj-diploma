@@ -40,12 +40,12 @@ class User {
       data,
       method: 'GET',
       callback: (response) => {
-          if (response && response.user) {
+          if (response.success) {
               this.setCurrent(response.user);
           } else {
               this.unsetCurrent();
           }
-          callback(err);
+          callback(err = null);
       }
     });
   }
@@ -62,10 +62,10 @@ class User {
       method: 'POST',
       data,
       callback: (response) => {
-        if (response && response.user) {
+        if (response.success) {
           this.setCurrent(response.user);
         }
-        callback(err);
+        callback(err = null);
       }
     });
   }
@@ -94,7 +94,7 @@ class User {
    * Производит выход из приложения. После успешного
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
-  static logout( data, callback = f = f) {
+  static logout( data, callback = f => f) {
     return createRequest({
       url: User.URL + '/logout',
       data,
@@ -103,7 +103,7 @@ class User {
           if (response.success) {
               this.unsetCurrent(response.user);
           }
-          callback(err);
+          callback(err = null);
       }
     });
   }
