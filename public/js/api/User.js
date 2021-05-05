@@ -85,7 +85,7 @@ class User {
           if (response.success) {
               this.setCurrent(response.user);
           }
-          callback(err);
+          callback(err = null);
       }
     });
   }
