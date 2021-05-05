@@ -3,13 +3,13 @@
  * Основная функция для совершения запросов
  * на сервер.
  * */
-const createRequest = (options = {}) => {
-    // console.log( options );
+const createRequest = (options = {},) => {
+    const callback = f => f;
     xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.withCredentials = true;
     const formData = new FormData();
-    if (options.method === 'POST') {
+    if (options.method) {
         for ( let key in options.data ) { 
             formData.append( `${ key }`, options.data[ key ] ) 
         }
@@ -17,17 +17,14 @@ const createRequest = (options = {}) => {
     try {
         xhr.open (options.method, options.url);
         xhr.send( options.method === 'GET' ? null : formData );
-    } catch (err) {
-        callback (err);
+    } catch (e) {
+        callback (e);
     };
     xhr.onload = () => {
-        if (xhr.status != 200) {
-            options.callback(err, response);
-        } else {
-            options.callback(null, response);
-        } 
+        options.callback(xhr.response);
     };
     xhr.onerror = () => { 
-        console.error('Запрос не удался') 
+        let err = xhr.status;
+        options.callback(err); 
     };
 };

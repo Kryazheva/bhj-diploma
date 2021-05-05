@@ -10,12 +10,12 @@ class Entity {
    * Это могут быть счета или доходы/расходы
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static list(data, callback){
+  static list(data, callback = f => f){
     return createRequest({
       url: this.URL,
       method: 'GET',
       data,
-      callback: callback (err, response)
+      callback
     });
   }
 
@@ -24,14 +24,12 @@ class Entity {
    * на сервер. (в зависимости от того,
    * что наследуется от Entity)
    * */
-  static create(data, callback) {
+  static create(data, callback = f => f) {
     return createRequest({
         url: this.URL,
-        method: 'POST',
-        data: Object.assign({
-           _method: 'PUT'
-        }, data),
-        callback: callback (err, response)
+        method: 'PUT',
+        data,
+        callback
     });
   }
 
@@ -39,15 +37,12 @@ class Entity {
    * Удаляет информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static remove(data, callback) {
+  static remove(data, callback = f => f) {
     return createRequest({
       url: this.URL,
-      method: 'POST',
-      data: Object.assign({
-          _method: 'DELETE',
-          id: id
-      }, data),
-      callback: callback (err, response)
+      method: 'DELETE',
+      data,
+      callback
     });
   }
 }
