@@ -4,10 +4,9 @@
  * на сервер.
  * */
 const createRequest = (options = {},) => {
-    const f = (fn) => {fn};
-    const {url, headers, data, responseType, method, callback = f} = options;
+    // const f = (fn) => {fn};
+    const {url, headers, data, responseType, method, callback = (f) => f} = options;
     let xhr = new XMLHttpRequest();
-    console.log(xhr)
     xhr.responseType = 'json';
     xhr.withCredentials = true;
     const formData = new FormData();
@@ -27,14 +26,17 @@ const createRequest = (options = {},) => {
             xhr.send(formData);
         };
     } catch (e) {
-        callback(e);
+        new Error ('Catch' + e);
     };
 
     xhr.onload = () => {
-        callback(xhr.response)
+        let responseObj = xhr.response;
+        console.log(responseObj)
+        options.callback(responseObj)
     };
     xhr.onerror = () => { 
         let err = xhr.statusText;
-        callback(err)
+        options.callback(err)
     };
+    return xhr
 };
