@@ -27,7 +27,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    localStorage.user ? JSON.parse(localStorage.user) : null;
+    return JSON.parse(localStorage.user);
   }
 
   /**
@@ -94,7 +94,7 @@ class User {
    * Производит выход из приложения. После успешного
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
-  static logout( data, callback = f => f) {
+  static logout( data, callback = f = f) {
     return createRequest({
       url: User.URL + '/logout',
       data,
