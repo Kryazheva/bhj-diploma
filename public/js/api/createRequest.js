@@ -5,7 +5,7 @@
  * */
 const createRequest = (options = {},) => {
     const callback = f => f;
-    xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.withCredentials = true;
     const formData = new FormData();
