@@ -9,6 +9,8 @@ const createRequest = (options = {},) => {
     xhr.responseType = 'json';
     xhr.withCredentials = true;
     const formData = new FormData();
+    let err = null;
+    const callback = options.callback = f => {f};
     
     try {
        
@@ -30,7 +32,7 @@ const createRequest = (options = {},) => {
 
     xhr.onload = () => {
         let responseObj = xhr.response;
-        xhr.status === 200 && xhr.readyState === 4 ? options.callback(null, responseObj) : options.callback(xhr.status, null)
+        xhr.status === 200 && xhr.readyState === 4 ? callback(err, responseObj) : callback(xhr.status, err)
     };
     xhr.onerror = () => { 
         options.callback(xhr.statusText)
