@@ -4,7 +4,6 @@
  * на сервер.
  * */
 const createRequest = (options = {},) => {
-    // const f = (fn) => {fn};
     const {url, headers, data, responseType, method, callback = (f) => f} = options;
     let xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -31,12 +30,10 @@ const createRequest = (options = {},) => {
 
     xhr.onload = () => {
         let responseObj = xhr.response;
-        console.log(responseObj)
-        options.callback(responseObj)
+        xhr.status === 200 && xhr.readyState === 4 ? options.callback(null, responseObj) : options.callback(xhr.status, null)
     };
     xhr.onerror = () => { 
-        let err = xhr.statusText;
-        options.callback(err)
+        options.callback(xhr.statusText)
     };
     return xhr
 };
