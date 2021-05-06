@@ -4,7 +4,7 @@
  * на сервер.
  * */
 const createRequest = (options = {},) => {
-    const {url, headers, data, responseType, method, callback = (f) => f} = options;
+    const {url, headers, data, responseType, method} = options;
     let xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.withCredentials = true;
