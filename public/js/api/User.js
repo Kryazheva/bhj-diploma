@@ -38,7 +38,7 @@ class User {
     return createRequest({
       url: this.URL + '/current',
       method: 'GET',
-      callback: (response) => {
+      callback: (err, response) => {
           if (response.success) {
               this.setCurrent(response.user);
           } else {
@@ -60,7 +60,7 @@ class User {
       url: this.URL + '/login',
       method: 'POST',
       data,
-      callback: (response) => {
+      callback: (err, response) => {
         if (response.success) {
           this.setCurrent(response.user);
         }
@@ -80,7 +80,7 @@ class User {
       url: this.URL + '/register',
       data,
       method: 'POST',
-      callback: (response) => {
+      callback: (err, response) => {
           if (response.success) {
               this.setCurrent(response.user);
           }
@@ -98,7 +98,7 @@ class User {
       url: this.URL + '/logout',
       data,
       method: 'POST',
-      callback: (response) => {
+      callback: (err, response) => {
           if (response.success) {
               this.unsetCurrent(response.user);
           }

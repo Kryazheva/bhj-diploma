@@ -28,9 +28,9 @@ const createRequest = (options = {},) => {
     };
 
     xhr.onload = () => {
-        options.callback(xhr.response)
+        options.callback(null, xhr.response)
     };
     xhr.onerror = () => { 
-        options.callback(null)
+        options.callback(xhr.statusText, null)
     };
 };
