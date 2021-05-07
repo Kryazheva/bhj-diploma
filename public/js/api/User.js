@@ -37,7 +37,6 @@ class User {
   static fetch(callback = f => f) {
     return createRequest({
       url: this.URL + '/current',
-      data,
       method: 'GET',
       callback: (response) => {
           if (response.success) {
@@ -78,7 +77,7 @@ class User {
    * */
   static register( data, callback = f => f) {
     return createRequest({
-      url: User.URL + '/register',
+      url: this.URL + '/register',
       data,
       method: 'POST',
       callback: (response) => {
@@ -96,7 +95,7 @@ class User {
    * */
   static logout( data, callback = f => f) {
     return createRequest({
-      url: User.URL + '/logout',
+      url: this.URL + '/logout',
       data,
       method: 'POST',
       callback: (response) => {

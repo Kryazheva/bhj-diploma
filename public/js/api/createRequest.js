@@ -8,28 +8,29 @@ const createRequest = (options = {},) => {
     xhr.responseType = 'json';
     xhr.withCredentials = true;
     const formData = new FormData();
-    let err = null;
-    const callback = options.callback = f => {f};
-    
-    try {
+           
+    if (options.method === 'GET') {
+        options.url += `?`;
+        for (let key in options.data) {
+            options.url += `${key}=${options.data[key]}&`;
+        }
+    } else {
+        for (let key in options.data) {
+            formData.append(key, options.data[key]);
 
-        if (options.method) {
-            for ( let key in options.data ) { 
-                formData.append( `${ key }`, `${options.data[ key ]}`);
-            }
-            xhr.open (options.method, options.url);
-            xhr.send(xhr.send(options.method === 'GET' ? null : formData));
-        };
+        }
+    }
+    try {
+        xhr.open (options.method, options.url);
+        xhr.send(formData);
     } catch (e) {
-        new Error ('Catch' + e);
+        throw `Catch' + ${e}`;
     };
 
     xhr.onload = () => {
-        let responseObj = xhr.response;
-        xhr.status === 200 && xhr.readyState === 4 ? callback(err, responseObj) : callback(xhr.status, err)
+        options.callback(xhr.response)
     };
     xhr.onerror = () => { 
-        options.callback(err)
+        options.callback(null)
     };
-    return xhr
 };

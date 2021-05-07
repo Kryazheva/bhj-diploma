@@ -13,8 +13,8 @@ class Entity {
   static list(data, callback = f => f){
     return createRequest({
       url: this.URL,
-      method: 'GET',
       data,
+      method: 'GET',
       callback
     });
   }
@@ -40,8 +40,8 @@ class Entity {
   static remove(data, callback = f => f) {
     return createRequest({
       url: this.URL,
-      method: 'DELETE',
       data,
+      method: 'DELETE',
       callback
     });
   }
