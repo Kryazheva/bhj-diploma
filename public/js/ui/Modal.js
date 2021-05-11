@@ -14,7 +14,7 @@ class Modal {
    * */
   constructor(element){
     if (!element) {
-      throw new Error('Ошибка! element не может быть пустым');
+      throw new Error(`Error empty ${element} in class Modal`);
     } else {
         this.element = element;
         this.registerEvents();
