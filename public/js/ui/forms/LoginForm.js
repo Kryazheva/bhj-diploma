@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Класс LoginForm управляет формой
  * входа в портал
@@ -10,6 +11,12 @@ class LoginForm extends AsyncForm {
    * закрывает окно, в котором находится форма
    * */
   onSubmit(data) {
-
+    User.register(data, (err, response) => {
+      if (response.success) {
+        App.setState('user-logged'); 
+        App.getModal('login').close(); //закрытие окна
+        this.element.reset();
+      } 
+    })
   }
 }

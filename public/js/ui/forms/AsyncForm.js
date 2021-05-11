@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Класс AsyncForm управляет всеми формами
  * приложения, которые не должны быть отправлены с
@@ -14,7 +15,7 @@ class AsyncForm {
    * */
   constructor(element) {
     if (!element) {
-     throw new Error ('Ошибка, пустой элемент' + `${element}`);
+     throw new Error (`Error enpty ${element} in class AsyncForm`);
     }
      this.element = element;
      this.registerEvents();
