@@ -11,7 +11,11 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-
+    if (!element) {
+      throw new Error (`Error empty ${element} in class TransactionsPage`)
+    }
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
