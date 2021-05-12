@@ -8,7 +8,10 @@ class CreateTransactionForm extends AsyncForm {
    * метод renderAccountsList
    * */
   constructor(element) {
-
+    if (!element) {
+      throw new Error (`Error empty ${element} in class CreateTransactionForm`)
+    }
+    super(element);
   }
 
   /**
