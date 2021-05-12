@@ -13,7 +13,7 @@ class UserWidget {
    * */
   constructor(element){
     if (!element) {
-      throw new Error (`Error enpty ${element} in class UserWidget`)
+      throw new Error (`Error empty ${element} in class UserWidget`)
     }
     this.element = element;
   }
