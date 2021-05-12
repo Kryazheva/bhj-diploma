@@ -15,7 +15,7 @@ class AsyncForm {
    * */
   constructor(element) {
     if (!element) {
-     throw new Error (`Error enpty ${element} in class AsyncForm`);
+     throw new Error (`Error empty ${element} in class AsyncForm`);
     }
      this.element = element;
      this.registerEvents();
