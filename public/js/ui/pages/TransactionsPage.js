@@ -57,13 +57,12 @@ class TransactionsPage {
     if (this.lastOptions) {
       const result = confirm('Вы действительно хотите удалить счёт?');
       if (result) {
-        function removeAccount(err, response) {
+        Account.remove({}, (err, response) => {
           if (response.success) {
-            App.update();
+            App.updateWidgets();
+            this.clear();
           };
-        };
-        Account.remove(this.lastOptions.account_id, {}, removeAccount);
-        this.clear();
+        });
       };
     };
   }
@@ -78,12 +77,11 @@ class TransactionsPage {
     if (this.lastOptions) {
       const result = confirm('Вы действительно хотите удалить эту транзакцию?');
       if (result) {
-        function removeTransaction(err, response) {
+        Transaction.remove(id, {}, (err, response) => {
           if (response.success) {
             App.update();
           };
-        };
-        Transaction.remove(id, {}, removeTransaction);
+        });
       };
     };
   }
@@ -98,7 +96,7 @@ class TransactionsPage {
     if (!options) {
       return
     }
-    Account.get({}, (err, response) => {
+    Account.get(options, (err, response) => {
       if (response.success) {
         this.renderTitle(response.data.name);
       }
