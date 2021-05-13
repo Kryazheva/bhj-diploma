@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Класс CreateTransactionForm управляет формой
  * создания новой транзакции
@@ -10,8 +11,9 @@ class CreateTransactionForm extends AsyncForm {
   constructor(element) {
     if (!element) {
       throw new Error (`Error empty ${element} in class CreateTransactionForm`)
-    }
+    } 
     super(element);
+    this.renderAccountsList();
   }
 
   /**
@@ -19,7 +21,13 @@ class CreateTransactionForm extends AsyncForm {
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
-
+    Account.list({}, (err, response) => {
+      if (response.success) {
+        let items = '';
+        Array.from(response.data).forEach(item => {items+= `<option value="${item.id}">${item.name}</option>`});
+      } 
+      document.querySelector('.accounts-select').innerHTML = items;
+    })
   }
 
   /**
@@ -29,6 +37,10 @@ class CreateTransactionForm extends AsyncForm {
    * в котором находится форма
    * */
   onSubmit(data) {
-
+    Transaction.create(data, (err, response) => {
+      if (response.success) {
+        App.update();
+      }
+    })
   }
 }
