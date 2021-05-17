@@ -132,10 +132,10 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
-    console.log(new Date);
-    date = new Date;
-    return date.toLocaleString('ru',
-    { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' });
+    const today = new Date();
+    const fullDay = today.toLocaleString('ru', {day: 'numeric', month: 'long', year: 'numeric'});
+    const time = today.toLocaleString('ru', {hour: 'numeric', minute: 'numeric' });
+    return `${fullDay} в ${time}`;
   }
 
   /**
