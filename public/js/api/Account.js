@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Класс Account наследуется от Entity.
  * Управляет счетами пользователя.
@@ -14,7 +15,7 @@ class Account extends Entity {
       url: this.URL,
       method: 'GET',
       id,
-      data,
+      data: {},
       callback
     });
   }

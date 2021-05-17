@@ -39,7 +39,7 @@ class User {
       url: this.URL + '/current',
       method: 'GET',
       callback: (err, response) => {
-          if (response.success) {
+          if (err === null && response.success) {
               this.setCurrent(response.user);
           } else {
               this.unsetCurrent();
@@ -61,7 +61,7 @@ class User {
       method: 'POST',
       data,
       callback: (err, response) => {
-        if (response.success) {
+        if (err === null && response.success) {
           this.setCurrent(response.user);
         }
         callback(err, response);
@@ -81,7 +81,7 @@ class User {
       data,
       method: 'POST',
       callback: (err, response) => {
-          if (response.success) {
+          if (err === null && response.success) {
               this.setCurrent(response.user);
           }
           callback(err, response);
@@ -99,7 +99,7 @@ class User {
       data,
       method: 'POST',
       callback: (err, response) => {
-          if (response.success) {
+          if (err === null && response.success) {
               this.unsetCurrent(response.user);
           }
           callback(err, response);

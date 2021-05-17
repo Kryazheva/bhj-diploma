@@ -33,16 +33,12 @@ class AccountsWidget {
   registerEvents() {
     this.element.onclick = (e) => {
       e.preventDefault();
-      const modalNewAccount = e.target.closest('.create-account');
-
-      if (modalNewAccount) {
-          return App.getModal('createAccount').open();
+      if (e.target == this.element.querySelector(".create-account")) {
+        App.getModal("createAccount").open();
       }
 
-      const account = e.target.closest('.account');
-
-      if (account) {
-          this.onSelectAccount(account);
+      if (e.target.closest(".account")) {
+        this.onSelectAccount(e.target.closest(".account"));
       }
     };
   }
@@ -89,10 +85,11 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount( element ) {
-    const activeAccount = document.querySelector('.account.active');
-    activeAccount ? activeAccount.classList.toggle('active') : '';
-    element.classList.toggle('active');
-    App.showPage('transactions', { account_id: element.dataset.id });
+    this.element.querySelectorAll(".active").forEach(account => {
+      account.classList.remove("active");
+    })
+    element.classList.add("active");
+    App.showPage("transactions", { account_id: element.dataset.id });
   }
 
   /**
@@ -101,6 +98,7 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML(item){
+    // console.log(item);
     return `
     <li class="account" data-id="${ item.id }">
       <a href="#"> ${ item.name } / ${ item.sum } ₽ </a>
