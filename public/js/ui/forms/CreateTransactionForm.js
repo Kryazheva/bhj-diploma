@@ -40,8 +40,7 @@ class CreateTransactionForm extends AsyncForm {
     Transaction.create(data, (err, response) => {
       if (err === null && response.success) {
         this.element.reset();
-        const modal = new Modal(this.element.closest('.modal'));
-        modal.close();
+        new Modal(this.element.closest('.modal')).close();
         App.update();
       }
     })
