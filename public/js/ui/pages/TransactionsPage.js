@@ -98,7 +98,7 @@ class TransactionsPage {
     }
     Account.get(options.account_id, (err, response) => {
       if (err === null && response.success) {
-        this.renderTitle(response.data.id);
+        this.renderTitle(response.data.name);
       }
     })
     
@@ -132,6 +132,7 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
+    // date = document.querySelector('.transaction__date');
     const today = new Date();
     const fullDay = today.toLocaleString('ru', {day: 'numeric', month: 'long', year: 'numeric'});
     const time = today.toLocaleString('ru', {hour: 'numeric', minute: 'numeric' });
