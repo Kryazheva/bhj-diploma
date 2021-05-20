@@ -26,7 +26,6 @@ const createRequest = (options = {}) => {
     } catch (e) {
         console.log('catch' + e);
     };
-
     xhr.onload = () => {
         options.callback(null, xhr.response);
     };

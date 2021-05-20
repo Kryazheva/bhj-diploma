@@ -15,7 +15,6 @@ class Account extends Entity {
       url: this.URL + '/' + id,
       method: 'GET',
       id,
-      data: {},
       callback
     });
   }

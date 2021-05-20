@@ -55,9 +55,10 @@ class TransactionsPage {
    * */
   removeAccount() {
     if (this.lastOptions) {
+      const id = this.lastOptions.account_id;
       if (confirm('Вы действительно хотите удалить счёт?')) {
         // console.log('this.lastOptions')
-        Account.remove(this.lastOptions.account_id,  (err, response) => {
+        Account.remove({id}, (err, response) => {
           if (err === null && response.success) {
             this.clear();
             App.update()
@@ -75,8 +76,9 @@ class TransactionsPage {
    * */
   removeTransaction( id ) {
     if (this.lastOptions) {
+      // id = this.lastOptions.account_id;
       if (confirm('Вы действительно хотите удалить эту транзакцию?')) {
-        Transaction.remove(this.lastOptions.account_id,  (err, response) => {
+        Transaction.remove({id},  (err, response) => {
           if (err === null && response.success) {
             App.update();
           };
@@ -132,8 +134,7 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
-    // date = document.querySelector('.transaction__date');
-    const today = new Date();
+    const today = new Date(Date.parse(date));
     const fullDay = today.toLocaleString('ru', {day: 'numeric', month: 'long', year: 'numeric'});
     const time = today.toLocaleString('ru', {hour: 'numeric', minute: 'numeric' });
     return `${fullDay} в ${time}`;
@@ -153,7 +154,7 @@ class TransactionsPage {
         <div class="transaction__info">
             <h4 class="transaction__title">${item.name}</h4>
             <!-- дата -->
-            <div class="transaction__date">${this.formatDate(item.date)}</div>
+            <div class="transaction__date">${this.formatDate(item.created_at)}</div>
         </div>
       </div>
       <div class="col-md-3">
