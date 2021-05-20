@@ -3,7 +3,7 @@
  * Основная функция для совершения запросов
  * на сервер.
  * */
-const createRequest = (options = {},) => {
+const createRequest = (options = {}) => {
     let xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.withCredentials = true;
@@ -24,7 +24,7 @@ const createRequest = (options = {},) => {
         xhr.open (options.method, options.url);
         xhr.send(formData);
     } catch (e) {
-        throw `Catch' + ${e}`;
+        console.log('catch' + e);
     };
 
     xhr.onload = () => {

@@ -98,7 +98,7 @@ class TransactionsPage {
     }
     Account.get(options.account_id, (err, response) => {
       if (err === null && response.success) {
-        this.renderTitle(response.data.name);
+        this.renderTitle(response.data.id);
       }
     })
     
